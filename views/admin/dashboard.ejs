@@ -1,0 +1,50 @@
+<% include('../layouts/header.ejs') %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<div class="container">
+    <h1>Dashboard</h1>
+    <a href="/admin/home" class="btn btn-secondary">Home</a>
+    <a href="/admin/new-user" class="btn btn-primary">Add New User</a>
+    <br><br>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Image</th>
+                <th>Verified</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if(users.length > 0) {
+                for(let i = 0; i < users.length; i++) { %>
+                    <tr>
+                        <td><%= users[i].name %></td>
+                        <td><%= users[i].email %></td>
+                        <td><%= users[i].mobile %></td>
+                        <td><img src="/userImages/<%= users[i].image %>" alt="<%= users[i].image %>" width="100px" height="100px"></td>
+                        <td>
+                            <% if(users[i].is_verified == 0) { %>
+                                <p class="text-danger">Not verified</p>
+                            <% } else { %>
+                                <p class="text-success">Verified</p>
+                            <% } %>
+                        </td>
+                        <td>
+                            <a href="/admin/edit-user?id=<%= users[i]._id %>" class="btn btn-info">Edit</a>
+                            <a href="/admin/delete-user?id=<%= users[i]._id %>" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                <% } 
+            } else { %>
+                <tr>
+                    <td colspan="6">Users Not found</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+<% include('../layouts/footer.ejs') %>

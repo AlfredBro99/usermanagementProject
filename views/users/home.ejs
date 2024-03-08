@@ -1,0 +1,43 @@
+<% include('../layouts/header.ejs') %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <div class="container">
+        <h1>Welcome, <%= user.name %>
+        </h1>
+
+        <div class="row">
+            <div class="col-md-4">
+                <img src="userImages/<%= user.image %>" class="img-fluid rounded-circle" width="100px" hegiht="100px"
+                    alt="<%= user.image %>">
+            </div>
+        </div>
+
+        <table class="table table-bordered mt-4" style="width: 50%;">
+            <tr>
+                <td>Email</td>
+                <td>
+                    <%= user.email %>
+                </td>
+            </tr>
+            <tr>
+                <td>Mobile</td>
+                <td>
+                    <%= user.mobile %>
+                </td>
+            </tr>
+            <tr>
+                <td>Verified</td>
+                <td>
+                    <% if(user.is_verified==1) { %>
+                        <p class="text-success">Verified</p>
+                        <% } else { %>
+                            <p class="text-danger">Not Verified</p>
+                            <% } %>
+                </td>
+            </tr>
+        </table>
+
+        <a href="/edit?id=<%= user._id %>" class="btn btn-primary">Edit</a>
+        <a href="/logout" class="btn btn-danger">Logout</a>
+    </div>
+
+    <% include('../layouts/footer.ejs') %>
