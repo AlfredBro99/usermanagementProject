@@ -1,12 +1,12 @@
 const express = require('express')
 const user_route = express()
 const session = require('express-session')
-
+const nocache = require('nocache')
 const config = require("../config/config")
 
 
-user_route.use(session({secret:config.sessionSecret}))
-
+user_route.use(session({secret:config.sessionSecret,resave:false,saveUninitialized:true}))
+user_route.use((nocache())
 const auth = require("../middleware/auth")
 
 user_route.set('view engine','ejs')
